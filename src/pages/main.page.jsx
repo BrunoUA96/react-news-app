@@ -4,7 +4,7 @@ import { NewsCart } from '../components/news/news-cart.component';
 
 export const Main = () => {
    return (
-      <div className="container mt-4 mx-auto">
+      <div className="container px-4 mt-4 mx-auto">
          <Header />
          <Categories />
 
