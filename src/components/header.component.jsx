@@ -4,7 +4,7 @@ export const Header = () => {
          {/* Greetings & Date today */}
          <div>
             <h1 className="text-3xl font-bold">Good morning</h1>
-            <span className="text-sm text-gray-500">Monday, Jaunary 25, 2023</span>
+            <span className="text-sm text-gray-500 font-light">Monday, Jaunary 25, 2023</span>
          </div>
          {/* Weather */}
          <div className="flex flex-col">
