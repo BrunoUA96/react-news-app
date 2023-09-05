@@ -2,7 +2,13 @@
 export default {
    content: ['./index.html', './src/**/*.{js,jsx}'],
    theme: {
-      extend: {},
+      extend: {
+         fontFamily: {
+            primary: ['Montserrat'],
+            title: ['Playfair Display'],
+         },
+      },
    },
-   plugins: [],
+   /*eslint-env node*/
+   plugins: [require('@tailwindcss/line-clamp')],
 };
