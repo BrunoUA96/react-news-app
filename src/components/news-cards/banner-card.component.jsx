@@ -1,4 +1,4 @@
-export const BannerCard = ({ isPrincipal = false }) => {
+export const BannerCard = ({ news, isPrincipal = false }) => {
    return (
       <>
          <div className={`flex flex-col cursor-pointer group ${isPrincipal ? 'gap-3' : 'gap-1'}`}>
@@ -8,9 +8,7 @@ export const BannerCard = ({ isPrincipal = false }) => {
                   className={`object-cover w-full h-full group-hover:scale-125 ease-in-out duration-300 ${
                      isPrincipal ? 'max-h-96' : 'max-h-36'
                   }`}
-                  src={
-                     'https://i.guim.co.uk/img/media/55b58f9514a6ccb5a57d59d04151af12864acf69/0_374_5616_3370/master/5616.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=416add2213cc99b0e4b11206ea66407b'
-                  }
+                  src={news.image}
                   alt="News image"
                />
             </div>
@@ -27,13 +25,10 @@ export const BannerCard = ({ isPrincipal = false }) => {
                   isPrincipal ? 'text-2xl' : 'text-base line-clamp-2'
                } `}
             >
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo omnis eligendi
-               obcaecati, recusandae dolores exercitationem sapiente ipsum minus.
+               {news.title}
             </h5>
             <p className={`line-clamp-3 text-gray-500 ${isPrincipal ? 'text-base' : 'text-sm'}`}>
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga in laborum libero
-               fugiat beatae, mollitia dicta dolor ipsum, facere, vero consequuntur minus nam sunt
-               corporis perspiciatis voluptatem aliquam excepturi iste?
+               {news.description}
             </p>
          </div>
       </>
