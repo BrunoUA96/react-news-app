@@ -5,6 +5,7 @@ import { BannerCard } from '../components/news-cards/banner-card.component';
 import { NewsCart } from '../components/news-cards/news-card.component';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from '../redux/slices/newsSlice';
+import { Skeleton } from '../components/news-cards/skeleton.component';
 
 export const Main = () => {
    const dispatch = useDispatch();
@@ -23,7 +24,19 @@ export const Main = () => {
       <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">
          <Header />
          <Categories activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-         {status === 'loaded' && (
+
+         {status === 'loading' ? (
+            <div className="grid grid-cols-12 gap-10 mb-12 border-b pb-5">
+               <div className="col-span-8">
+                  <Skeleton width={648} height={556} />
+               </div>
+
+               <div className="flex flex-col gap-3 col-span-4">
+                  <Skeleton width={304} height={243} />
+                  <Skeleton width={304} height={243} />
+               </div>
+            </div>
+         ) : (
             <>
                <div className="grid grid-cols-12 gap-10 mb-12 border-b pb-5">
                   <div className="col-span-8">
