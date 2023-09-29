@@ -9,14 +9,13 @@ import { fetchNews } from '../redux/slices/newsSlice';
 export const Main = () => {
    const dispatch = useDispatch();
    const { news, status } = useSelector((state) => state.news);
+
    // Banner news
    const [first, second, third] = news.slice(0, 3);
 
    useEffect(() => {
       dispatch(fetchNews());
    }, []);
-
-   console.log('first', news);
 
    return (
       <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">

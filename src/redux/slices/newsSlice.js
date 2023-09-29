@@ -2,9 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchNews = createAsyncThunk('news/fetchNewsStatus', async () => {
-   const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}latest-news?apiKey=${import.meta.env.VITE_API_KEY}`,
-   );
+   const baseURL = import.meta.env.VITE_API_URL;
+   const apiKey = import.meta.env.VITE_API_KEY;
+
+   const { data } = await axios.get(`${baseURL}latest-news`, {
+      params: { apiKey },
+   });
 
    return data;
 });
@@ -35,7 +38,7 @@ export const newsSlice = createSlice({
             state.status = 'loaded';
             console.log('fetchNews is loaded');
          }),
-         builder.addCase(fetchNews.rejected, (state) => {
+         builder.addCase(fetchNews.rejected, () => {
             console.log('fetchNews is ERROR');
          });
    },
