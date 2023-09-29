@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Categories } from '../components/categories.component';
 import { Header } from '../components/header.component';
 import { BannerCard } from '../components/news-cards/banner-card.component';
@@ -10,17 +10,19 @@ export const Main = () => {
    const dispatch = useDispatch();
    const { news, status } = useSelector((state) => state.news);
 
+   const [activeCategory, setActiveCategory] = useState('All');
+
    // Banner news
    const [first, second, third] = news.slice(0, 3);
 
    useEffect(() => {
-      dispatch(fetchNews());
-   }, []);
+      dispatch(fetchNews(activeCategory));
+   }, [activeCategory]);
 
    return (
       <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">
          <Header />
-         <Categories />
+         <Categories activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
          {status === 'loaded' && (
             <>
                <div className="grid grid-cols-12 gap-10 mb-12 border-b pb-5">

@@ -1,13 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-export const fetchNews = createAsyncThunk('news/fetchNewsStatus', async () => {
-   const baseURL = import.meta.env.VITE_API_URL;
-   const apiKey = import.meta.env.VITE_API_KEY;
+import { getAPI } from '../hooks/getAPI';
 
-   const { data } = await axios.get(`${baseURL}latest-news`, {
-      params: { apiKey },
-   });
+export const fetchNews = createAsyncThunk('news/fetchNewsStatus', async (params) => {
+   const url = params === 'All' ? 'latest-news' : 'search';
+   const { data } = await getAPI(url, params === 'All' ? '' : params);
 
    return data;
 });

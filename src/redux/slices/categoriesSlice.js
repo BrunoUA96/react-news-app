@@ -1,13 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getAPI } from '../hooks/getAPI';
 
 export const fetchCategories = createAsyncThunk('categories/fetchNewsStatus', async () => {
-   const baseURL = import.meta.env.VITE_API_URL;
-   const apiKey = import.meta.env.VITE_API_KEY;
-
-   const { data } = await axios.get(`${baseURL}available/categories`, {
-      params: { apiKey },
-   });
+   const { data } = await getAPI('available/categories');
 
    return data;
 });
