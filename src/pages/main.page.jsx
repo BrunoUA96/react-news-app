@@ -6,19 +6,24 @@ import { NewsCart } from '../components/news-cards/news-card.component';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from '../redux/slices/newsSlice';
 import { Skeleton } from '../components/news-cards/skeleton.component';
+import { Pagination } from '../components/pagination.component';
 
 export const Main = () => {
    const dispatch = useDispatch();
    const { news, status } = useSelector((state) => state.news);
 
    const [activeCategory, setActiveCategory] = useState('All');
+   const [activePage, setActivePage] = useState(1);
+   const [itemsPerPage, setItemsPerPage] = useState(10);
 
    // Banner news
    const [first, second, third] = news.slice(0, 3);
 
    useEffect(() => {
-      dispatch(fetchNews(activeCategory));
-   }, [activeCategory]);
+      const params = { category: activeCategory, page_number: activePage, page_size: itemsPerPage };
+
+      dispatch(fetchNews(params));
+   }, [activeCategory, activePage]);
 
    return (
       <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">
@@ -54,6 +59,8 @@ export const Main = () => {
                ))}
             </>
          )}
+
+         <Pagination activePage={activePage} setActivePage={setActivePage} />
       </div>
    );
 };

@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAPI } from '../hooks/getAPI';
 
 export const fetchNews = createAsyncThunk('news/fetchNewsStatus', async (params) => {
-   const url = params === 'All' ? 'latest-news' : 'search';
-   const { data } = await getAPI(url, params === 'All' ? '' : params);
+   // const url = params === 'All' ? 'latest-news' : 'search';
+   const { data } = await getAPI('search', params);
 
    return data;
 });
