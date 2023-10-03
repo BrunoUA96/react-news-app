@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { getAPI } from '../hooks/getAPI';
+import { getAPI } from '../../api/getAPI';
 
 export const fetchNews = createAsyncThunk('news/fetchNewsStatus', async (params) => {
    // const url = params === 'All' ? 'latest-news' : 'search';

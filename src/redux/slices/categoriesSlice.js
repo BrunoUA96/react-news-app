@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAPI } from '../hooks/getAPI';
+import { getAPI } from '../../api/getAPI';
 
 export const fetchCategories = createAsyncThunk('categories/fetchNewsStatus', async () => {
    const { data } = await getAPI('available/categories');
