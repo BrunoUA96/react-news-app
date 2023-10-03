@@ -7,23 +7,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from '../redux/slices/newsSlice';
 import { Skeleton } from '../components/news-cards/skeleton.component';
 import { Pagination } from '../components/pagination.component';
+import { selectRegions } from '../redux/slices/regionsSlice';
 
 export const Main = () => {
    const dispatch = useDispatch();
    const { news, status } = useSelector((state) => state.news);
+   const { activeRegion } = useSelector(selectRegions);
 
    const [activeCategory, setActiveCategory] = useState('All');
    const [activePage, setActivePage] = useState(1);
-   const [itemsPerPage, setItemsPerPage] = useState(10);
+   const [itemsPerPage, _] = useState(10);
 
    // Banner news
    const [first, second, third] = news.slice(0, 3);
 
    useEffect(() => {
-      const params = { category: activeCategory, page_number: activePage, page_size: itemsPerPage };
+      const params = {
+         category: activeCategory,
+         page_number: activePage,
+         page_size: itemsPerPage,
+         country: activeRegion,
+      };
 
       dispatch(fetchNews(params));
-   }, [activeCategory, activePage]);
+   }, [activeCategory, activePage, activeRegion]);
 
    return (
       <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">
