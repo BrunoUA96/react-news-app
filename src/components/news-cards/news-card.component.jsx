@@ -1,7 +1,32 @@
-export const NewsCart = ({ news }) => {
+import { motion } from 'framer-motion';
+
+// Animation content
+export const newsCardAnimation = {
+   hidden: (order) => ({
+      x: order % 2 === 1 ? -200 : 200,
+      opacity: 0,
+   }),
+   visible: (custom) => ({
+      x: 0,
+      opacity: 1,
+      transition: { delay: custom * 0.2 },
+   }),
+};
+
+export const NewsCard = ({ news, viewPortIndex }) => {
    return (
-      <>
-         <div className="grid grid-cols-12 gap-10 cursor-pointer group mb-5">
+      <motion.div
+         initial="hidden"
+         whileInView="visible"
+         viewport={{ amount: 0.2, once: true }}
+         className="w-full"
+      >
+         <motion.div
+            order={viewPortIndex}
+            custom={viewPortIndex}
+            variants={newsCardAnimation}
+            className="grid grid-cols-12 gap-10 cursor-pointer group mb-5"
+         >
             {/* Image */}
             <div className="flex-shrink-0 col-span-3 overflow-hidden">
                <img
@@ -23,7 +48,7 @@ export const NewsCart = ({ news }) => {
                   <span>by {news.author}</span>
                </div>
             </div>
-         </div>
-      </>
+         </motion.div>
+      </motion.div>
    );
 };

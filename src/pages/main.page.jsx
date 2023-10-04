@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Categories } from '../components/categories.component';
 import { Header } from '../components/header.component';
-import { BannerCard } from '../components/news-cards/banner-card.component';
-import { NewsCart } from '../components/news-cards/news-card.component';
+import { MotionBannerCard } from '../components/news-cards/banner-card.component';
+import { NewsCard, newsCardAnimation } from '../components/news-cards/news-card.component';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from '../redux/slices/newsSlice';
 import { Skeleton } from '../components/news-cards/skeleton.component';
 import { Pagination } from '../components/pagination.component';
 import { selectRegions } from '../redux/slices/regionsSlice';
+import { motion } from 'framer-motion';
 
 export const Main = () => {
    const dispatch = useDispatch();
@@ -50,20 +51,31 @@ export const Main = () => {
             </div>
          ) : (
             <>
-               <div className="grid grid-cols-12 gap-10 mb-12 border-b pb-5">
+               <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="grid grid-cols-12 gap-10 mb-12 border-b pb-5"
+               >
                   <div className="col-span-8">
-                     <BannerCard isPrincipal news={first} />
+                     <MotionBannerCard
+                        custom={1}
+                        variants={newsCardAnimation}
+                        isPrincipal
+                        news={first}
+                     />
                   </div>
 
                   <div className="flex flex-col gap-3 col-span-4">
-                     <BannerCard news={second} />
-                     <BannerCard news={third} />
+                     <MotionBannerCard custom={2} variants={newsCardAnimation} news={second} />
+                     <MotionBannerCard custom={3} variants={newsCardAnimation} news={third} />
                   </div>
+               </motion.div>
+               <div className="flex flex-col">
+                  {news.slice(3).map((newsItem, index) => (
+                     <NewsCard viewPortIndex={index + 1} key={newsItem.id} news={newsItem} />
+                  ))}
                </div>
-
-               {news.slice(3).map((newsItem) => (
-                  <NewsCart key={newsItem.id} news={newsItem} />
-               ))}
             </>
          )}
 
