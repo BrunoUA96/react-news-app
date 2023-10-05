@@ -8,12 +8,12 @@ export const fetchCategories = createAsyncThunk(
     const { data } = await getAPI('available/categories');
 
     return data;
-  }
+  },
 );
 
 const initialState = {
   categories: [],
-  status: 'loading'
+  status: 'loading',
 };
 
 export const categoriesSlice = createSlice({
@@ -33,7 +33,7 @@ export const categoriesSlice = createSlice({
       builder.addCase(fetchCategories.rejected, () => {
         console.log('fetchNews is ERROR');
       });
-  }
+  },
 });
 
 export default categoriesSlice.reducer;

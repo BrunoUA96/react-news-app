@@ -1,17 +1,16 @@
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Categories } from '../components/categories.component';
-import { MotionBannerCard } from '../components/news-cards/banner-card.component';
-import { newsCardAnimation } from '../components/news-cards/motionCardAnimation';
-import { NewsCard } from '../components/news-cards/news-card.component';
-import { Skeleton } from '../components/news-cards/skeleton.component';
-import { Pagination } from '../components/pagination.component';
+import { Categories } from '@/components/categories.component';
 import { Header } from '@/components/header.component';
-
-import { fetchNews } from '../redux/slices/newsSlice';
-import { selectRegions } from '../redux/slices/regionsSlice';
+import { MotionBannerCard } from '@/components/news-cards/banner-card.component';
+import { newsCardAnimation } from '@/components/news-cards/motionCardAnimation';
+import { NewsCard } from '@/components/news-cards/news-card.component';
+import { Skeleton } from '@/components/news-cards/skeleton.component';
+import { Pagination } from '@/components/pagination.component';
+import { fetchNews } from '@/redux/slices/newsSlice';
+import { selectRegions } from '@/redux/slices/regionsSlice';
+import { motion } from 'framer-motion';
 
 export const Main = () => {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ export const Main = () => {
       category: activeCategory,
       page_number: activePage,
       page_size: itemsPerPage,
-      country: activeRegion
+      country: activeRegion,
     };
 
     dispatch(fetchNews(params));

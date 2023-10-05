@@ -8,12 +8,12 @@ export const fetchRegions = createAsyncThunk(
     const { data } = await getAPI('available/regions');
 
     return data;
-  }
+  },
 );
 
 const initialState = {
   regionsList: [],
-  activeRegion: 'PT'
+  activeRegion: 'PT',
 };
 
 export const regionsSlice = createSlice({
@@ -22,7 +22,7 @@ export const regionsSlice = createSlice({
   reducers: {
     setRegion: (state, action) => {
       state.activeRegion = action.payload;
-    }
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchRegions.pending, () => {
@@ -35,7 +35,7 @@ export const regionsSlice = createSlice({
       builder.addCase(fetchRegions.rejected, () => {
         console.log('fetchRegions is ERROR');
       });
-  }
+  },
 });
 
 export const { setRegion } = regionsSlice.actions;

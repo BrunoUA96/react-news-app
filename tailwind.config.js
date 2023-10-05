@@ -5,10 +5,10 @@ export default {
     extend: {
       fontFamily: {
         primary: ['Montserrat'],
-        title: ['Playfair Display']
-      }
-    }
+        title: ['Playfair Display'],
+      },
+    },
   },
   /*eslint-env node*/
-  plugins: [require('@tailwindcss/line-clamp')]
+  plugins: [require('@tailwindcss/line-clamp')],
 };

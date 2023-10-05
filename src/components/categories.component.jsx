@@ -1,19 +1,19 @@
-import { motion } from 'framer-motion';
 import { forwardRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchCategories } from '../redux/slices/categoriesSlice';
+import { fetchCategories } from '@/redux/slices/categoriesSlice';
+import { motion } from 'framer-motion';
 
 const categoryAnimation = {
   hidden: {
     y: -100,
-    opacity: 0
+    opacity: 0,
   },
   visible: custom => ({
     y: 0,
     opacity: 1,
-    transition: { delay: custom * 0.09 }
-  })
+    transition: { delay: custom * 0.09 },
+  }),
 };
 
 export const Categories = ({ activeCategory, setActiveCategory }) => {
@@ -72,7 +72,7 @@ const CategoryItem = forwardRef(
         {category}
       </button>
     </li>
-  )
+  ),
 );
 
 CategoryItem.displayName = 'categoryItem';

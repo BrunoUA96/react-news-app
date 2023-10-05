@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import { forwardRef } from 'react';
+
+import { motion } from 'framer-motion';
 
 export const BannerCard = forwardRef(({ news, isPrincipal = false }, ref) => {
   return (

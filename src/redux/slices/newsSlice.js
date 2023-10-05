@@ -8,12 +8,12 @@ export const fetchNews = createAsyncThunk(
     const { data } = await getAPI('search', params);
 
     return data;
-  }
+  },
 );
 
 const initialState = {
   news: [],
-  status: 'loading'
+  status: 'loading',
 };
 
 export const newsSlice = createSlice({
@@ -33,7 +33,7 @@ export const newsSlice = createSlice({
       builder.addCase(fetchNews.rejected, () => {
         console.log('fetchNews is ERROR');
       });
-  }
+  },
 });
 
 export const { addNews, removeAllNews } = newsSlice.actions;

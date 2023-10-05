@@ -1,5 +1,6 @@
-import { newsCardAnimation } from './motionCardAnimation';
 import { motion } from 'framer-motion';
+
+import { newsCardAnimation } from './motionCardAnimation';
 
 export const NewsCard = ({ news, viewPortIndex }) => {
   return (
@@ -9,7 +10,6 @@ export const NewsCard = ({ news, viewPortIndex }) => {
       viewport={{ amount: 0.2, once: true }}
       className="w-full"
     >
-      <Header />
       <motion.div
         order={viewPortIndex}
         custom={viewPortIndex}

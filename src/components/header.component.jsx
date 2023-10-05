@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchRegions,
   selectRegions,
-  setRegion
-} from '../redux/slices/regionsSlice';
+  setRegion,
+} from '@/redux/slices/regionsSlice';
 
 export const Header = () => {
   const { regionsList, activeRegion } = useSelector(selectRegions);
