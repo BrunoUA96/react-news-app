@@ -47,12 +47,10 @@ export const newsSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchNews.pending, state => {
       state.status = 'loading';
-      console.log('fetchNews is pending');
     }),
       builder.addCase(fetchNews.fulfilled, (state, action) => {
         state.news = action.payload.news;
         state.status = 'loaded';
-        console.log('fetchNews is loaded');
       }),
       builder.addCase(fetchNews.rejected, () => {
         console.log('fetchNews is ERROR');

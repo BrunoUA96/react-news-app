@@ -36,7 +36,6 @@ export const regionsSlice = createSlice({
     }),
       builder.addCase(fetchRegions.fulfilled, (state, action) => {
         state.regionsList = action.payload.regions;
-        console.log('fetchRegions is loaded');
       }),
       builder.addCase(fetchRegions.rejected, () => {
         console.log('fetchRegions is ERROR');
