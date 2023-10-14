@@ -22,7 +22,7 @@ export const Header: FC = () => {
   };
 
   return (
-    <div className="flex justify-between border-b pb-3">
+    <div className="flex justify-between items-center border-b pb-3">
       {/* Greetings & Date today */}
       <div>
         <h1 className="text-3xl font-bold">Good morning</h1>
@@ -32,7 +32,6 @@ export const Header: FC = () => {
       </div>
       {/* Weather */}
       <div className="flex flex-col items-end">
-        <div className="text-xl font-bold">28°C</div>
         <div className="flex">
           {Object.keys(regionsList).length && (
             <select
