@@ -15,7 +15,7 @@ export const Header: FC = () => {
 
   useEffect(() => {
     dispatch(fetchRegions());
-  }, []);
+  }, [dispatch]);
 
   const onChangeRegion = (region: string) => {
     dispatch(setRegion(region));
