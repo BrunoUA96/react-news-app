@@ -34,23 +34,28 @@ export const Header: FC = () => {
       <div className="flex flex-col items-end">
         <div className="text-xl font-bold">28°C</div>
         <div className="flex">
-          <select
-            id="countries"
-            className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
-            onChange={e => onChangeRegion(e.target.value)}
-          >
-            {Object.keys(regionsList)
-              .sort()
-              .map(region => (
-                <option
-                  key={regionsList[region]}
-                  value={regionsList[region]}
-                  selected={activeRegion === regionsList[region]}
-                >
-                  {region}
-                </option>
-              ))}
-          </select>
+          {Object.keys(regionsList).length && (
+            <select
+              className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
+              value={Object.values(regionsList).find(
+                region => region === activeRegion,
+              )}
+              onChange={e => onChangeRegion(e.target.value)}
+            >
+              {Object.keys(regionsList)
+                .sort()
+                .map(region => {
+                  return (
+                    <option
+                      key={regionsList[region]}
+                      value={regionsList[region]}
+                    >
+                      {region}
+                    </option>
+                  );
+                })}
+            </select>
+          )}
         </div>
       </div>
     </div>
