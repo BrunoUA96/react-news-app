@@ -20,13 +20,15 @@ export const BannerCard = forwardRef<HTMLDivElement, Props>(
       >
         {/* Image */}
         <div className="flex-shrink-0 overflow-hidden">
-          <img
-            className={`object-cover w-full h-full group-hover:scale-125 ease-in-out duration-300 ${
-              isPrincipal ? 'max-h-96' : 'max-h-36'
-            }`}
-            src={news.image}
-            alt="News image"
-          />
+          {news.image && (
+            <img
+              className={`object-cover w-full h-full group-hover:scale-125 ease-in-out duration-300 ${
+                isPrincipal ? 'max-h-96' : 'max-h-36'
+              }`}
+              src={news.image}
+              alt="News image"
+            />
+          )}
         </div>
         <div
           className={`flex justify-between text-gray-400 font-light group-hover:text-yellow-600 ease-in-out duration-300 ${
