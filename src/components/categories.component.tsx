@@ -32,7 +32,7 @@ export const Categories: FC<CategoriesPropsInterface> = ({
 
   useEffect(() => {
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   const onChangeCategory = (category: string) => {
     setActiveCategory(category);
