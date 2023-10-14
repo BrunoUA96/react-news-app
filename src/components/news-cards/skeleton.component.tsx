@@ -1,6 +1,12 @@
+import { FC } from 'react';
 import ContentLoader from 'react-content-loader';
 
-export const Skeleton = ({ width, height }) => {
+interface SkeletonInterface {
+  width: number;
+  height: number;
+}
+
+export const Skeleton: FC<SkeletonInterface> = ({ width, height }) => {
   const viewBox = `0 0 ${width} ${height}`;
   return (
     <ContentLoader

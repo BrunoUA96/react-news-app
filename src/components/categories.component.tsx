@@ -1,7 +1,8 @@
-import { forwardRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, forwardRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { fetchCategories } from '@/redux/slices/categoriesSlice';
+import { RootState, useAppDispatch } from '@/redux/store';
 import { motion } from 'framer-motion';
 
 const categoryAnimation = {
@@ -9,23 +10,31 @@ const categoryAnimation = {
     y: -100,
     opacity: 0,
   },
-  visible: custom => ({
+  visible: (custom: number) => ({
     y: 0,
     opacity: 1,
     transition: { delay: custom * 0.09 },
   }),
 };
 
-export const Categories = ({ activeCategory, setActiveCategory }) => {
-  const dispatch = useDispatch();
+interface CategoriesPropsInterface {
+  activeCategory: string;
+  setActiveCategory(category: string): void;
+}
 
-  const { categories } = useSelector(state => state.categories);
+export const Categories: FC<CategoriesPropsInterface> = ({
+  activeCategory,
+  setActiveCategory,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const { categories } = useSelector((state: RootState) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
 
-  const onChangeCategory = category => {
+  const onChangeCategory = (category: string) => {
     setActiveCategory(category);
   };
 
@@ -57,8 +66,14 @@ export const Categories = ({ activeCategory, setActiveCategory }) => {
   );
 };
 
+interface CategoryItemInterface {
+  category: string;
+  activeCategory: string;
+  onChangeCategory: (category: string) => void;
+}
+
 // Category Item
-const CategoryItem = forwardRef(
+const CategoryItem = forwardRef<HTMLLIElement, CategoryItemInterface>(
   ({ category, activeCategory, onChangeCategory }, ref) => (
     <li ref={ref}>
       <button

@@ -1,8 +1,16 @@
+import { FC } from 'react';
+
+import { newsInterface } from '@/redux/slices/newsSlice';
 import { motion } from 'framer-motion';
 
 import { newsCardAnimation } from './motionCardAnimation';
 
-export const NewsCard = ({ news, viewPortIndex }) => {
+interface NewsCardInterface {
+  news: newsInterface;
+  viewPortIndex: number;
+}
+
+export const NewsCard: FC<NewsCardInterface> = ({ news, viewPortIndex }) => {
   return (
     <motion.div
       initial="hidden"
@@ -11,7 +19,6 @@ export const NewsCard = ({ news, viewPortIndex }) => {
       className="w-full"
     >
       <motion.div
-        order={viewPortIndex}
         custom={viewPortIndex}
         variants={newsCardAnimation}
         className="grid grid-cols-12 gap-10 cursor-pointer group mb-5"

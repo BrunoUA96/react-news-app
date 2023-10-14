@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import {
   fetchRegions,
   selectRegions,
   setRegion,
 } from '@/redux/slices/regionsSlice';
+import { useAppDispatch } from '@/redux/store';
 
-export const Header = () => {
+export const Header: FC = () => {
   const { regionsList, activeRegion } = useSelector(selectRegions);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchRegions());
   }, []);
 
-  const onChangeRegion = region => {
+  const onChangeRegion = (region: string) => {
     dispatch(setRegion(region));
   };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Categories } from '@/components/categories.component';
 import { Header } from '@/components/header.component';
@@ -10,11 +10,12 @@ import { Skeleton } from '@/components/news-cards/skeleton.component';
 import { Pagination } from '@/components/pagination.component';
 import { fetchNews } from '@/redux/slices/newsSlice';
 import { selectRegions } from '@/redux/slices/regionsSlice';
+import { RootState, useAppDispatch } from '@/redux/store';
 import { motion } from 'framer-motion';
 
 export const Main = () => {
-  const dispatch = useDispatch();
-  const { news, status } = useSelector(state => state.news);
+  const dispatch = useAppDispatch();
+  const { news, status } = useSelector((state: RootState) => state.news);
   const { activeRegion } = useSelector(selectRegions);
 
   const [activeCategory, setActiveCategory] = useState('All');

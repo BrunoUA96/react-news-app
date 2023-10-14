@@ -11,10 +11,15 @@ export const fetchCategories = createAsyncThunk(
   },
 );
 
+interface inicialStateInterface {
+  categories: string[];
+  status: string;
+}
+
 const initialState = {
   categories: [],
   status: 'loading',
-};
+} as inicialStateInterface;
 
 export const categoriesSlice = createSlice({
   name: 'News',

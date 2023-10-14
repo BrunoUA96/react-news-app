@@ -2,19 +2,43 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getAPI } from '../../api/getAPI';
 
-export const fetchNews = createAsyncThunk(
+interface params {
+  category: string;
+  page_number: number;
+  page_size: number;
+  country: string;
+}
+
+export type newsDTO = {
+  news: newsInterface[];
+};
+
+export interface newsInterface {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+  author: string;
+}
+
+interface inicialStateInterface {
+  news: newsInterface[];
+  status: string;
+}
+
+export const fetchNews = createAsyncThunk<newsDTO, params>(
   'news/fetchNewsStatus',
   async params => {
     const { data } = await getAPI('search', params);
 
-    return data;
+    return data as newsDTO;
   },
 );
 
 const initialState = {
   news: [],
   status: 'loading',
-};
+} as inicialStateInterface;
 
 export const newsSlice = createSlice({
   name: 'News',
@@ -36,6 +60,6 @@ export const newsSlice = createSlice({
   },
 });
 
-export const { addNews, removeAllNews } = newsSlice.actions;
+// export const {} = newsSlice.actions;
 
 export default newsSlice.reducer;

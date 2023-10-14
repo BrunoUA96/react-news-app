@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getAPI } from '../../api/getAPI';
+import { RootState } from '../store';
 
 export const fetchRegions = createAsyncThunk(
   'regions/fetchNewsStatus',
@@ -11,8 +12,13 @@ export const fetchRegions = createAsyncThunk(
   },
 );
 
-const initialState = {
-  regionsList: [],
+interface initialStateInterface {
+  regionsList: { [key: string]: string };
+  activeRegion: string;
+}
+
+const initialState: initialStateInterface = {
+  regionsList: {},
   activeRegion: 'PT',
 };
 
@@ -42,4 +48,4 @@ export const { setRegion } = regionsSlice.actions;
 
 export default regionsSlice.reducer;
 
-export const selectRegions = state => state.regions;
+export const selectRegions = (state: RootState) => state.regions;
