@@ -2,6 +2,13 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
+  getDayName,
+  getDayNumber,
+  getMonthName,
+  getPartOfDay,
+  getYear,
+} from '@/helpers/useCalendar';
+import {
   fetchRegions,
   selectRegions,
   setRegion,
@@ -25,9 +32,9 @@ export const Header: FC = () => {
     <div className="flex justify-between items-center border-b pb-3">
       {/* Greetings & Date today */}
       <div>
-        <h1 className="text-3xl font-bold">Good morning</h1>
+        <h1 className="text-3xl font-bold">{getPartOfDay()}</h1>
         <span className="text-sm text-gray-500 font-light">
-          Monday, Jaunary 25, 2023
+          {getDayName()}, {getMonthName()} {getDayNumber()}, {getYear()}
         </span>
       </div>
       {/* Weather */}
