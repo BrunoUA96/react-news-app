@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAPI } from '../../api/getAPI';
 
 export const fetchCategories = createAsyncThunk(
-  'categories/fetchNewsStatus',
+  'categories/fetchCategories',
   async () => {
     const { data } = await getAPI('available/categories');
 
@@ -22,7 +22,7 @@ const initialState = {
 } as inicialStateInterface;
 
 export const categoriesSlice = createSlice({
-  name: 'News',
+  name: 'Categories',
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -34,7 +34,7 @@ export const categoriesSlice = createSlice({
         state.status = 'loaded';
       }),
       builder.addCase(fetchCategories.rejected, () => {
-        console.log('fetchNews is ERROR');
+        console.log('fetchCategories is ERROR');
       });
   },
 });
