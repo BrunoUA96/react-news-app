@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
+    "module": "es2020",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "checkJs": false,
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["./src/components/*"],
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src/**/*"],
+  "jsxFactory": "probably the same as transform-react-jsx setting in your plugins"
 }
