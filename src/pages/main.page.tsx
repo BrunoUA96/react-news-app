@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Categories } from '@/components/categories.component';
-import { Header } from '@/components/header.component';
-import { MotionBannerCard } from '@/components/news-cards/banner-card.component';
-import { newsCardAnimation } from '@/components/news-cards/motionCardAnimation';
-import { NewsCard } from '@/components/news-cards/news-card.component';
-import { Skeleton } from '@/components/news-cards/skeleton.component';
-import { Pagination } from '@/components/pagination.component';
+import {
+  Categories,
+  Header,
+  MotionBannerCard,
+  NewsCard,
+  Pagination,
+  Skeleton,
+  newsCardAnimation,
+} from '@/components';
 import { fetchNews } from '@/redux/slices/newsSlice';
 import { selectRegions } from '@/redux/slices/regionsSlice';
 import { RootState, useAppDispatch } from '@/redux/store';
@@ -31,14 +33,15 @@ export const Main = () => {
       category: activeCategory,
       page_number: activePage,
       page_size: itemsPerPage,
+      // Check if region exist in list
       country: activeRegion,
     };
 
     dispatch(fetchNews(params));
-  }, [activeCategory, activePage, activeRegion]);
+  }, [activeCategory, activePage, activeRegion, dispatch]);
 
   return (
-    <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary">
+    <div className="container max-w-screen-lg px-4 mt-4 mx-auto font-primary overflow-hidden">
       <Header />
       <Categories
         activeCategory={activeCategory}
