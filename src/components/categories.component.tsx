@@ -1,8 +1,12 @@
-import { FC, forwardRef, useEffect } from 'react';
+import { FC, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { fetchCategories } from '@/redux/slices/categoriesSlice';
-import { RootState, useAppDispatch } from '@/redux/store';
+import { useGetCategoriesQuery } from '@/api/getAPI';
+import {
+  selectedCategory,
+  setActiveCategory,
+} from '@/redux/slices/categorySlice';
+import { useAppDispatch } from '@/redux/store';
 import { motion } from 'framer-motion';
 
 const categoryAnimation = {
@@ -17,26 +21,28 @@ const categoryAnimation = {
   }),
 };
 
-interface CategoriesPropsInterface {
-  activeCategory: string;
-  setActiveCategory(category: string): void;
-}
+interface CategoriesProps {}
 
-export const Categories: FC<CategoriesPropsInterface> = ({
-  activeCategory,
-  setActiveCategory,
-}) => {
+export const Categories: FC<CategoriesProps> = () => {
   const dispatch = useAppDispatch();
 
-  const { categories } = useSelector((state: RootState) => state.categories);
+  const activeCategory = useSelector(selectedCategory);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  const { data, error, isLoading } = useGetCategoriesQuery(
+    'available/categories',
+  );
 
   const onChangeCategory = (category: string) => {
-    setActiveCategory(category);
+    dispatch(setActiveCategory(category));
   };
+
+  if (error) {
+    return <div>Not available categories</div>;
+  }
+
+  if (isLoading) {
+    return <div>Is Loading</div>;
+  }
 
   return (
     <motion.ul
@@ -52,7 +58,7 @@ export const Categories: FC<CategoriesPropsInterface> = ({
         onChangeCategory={onChangeCategory}
       />
 
-      {categories.map((category, index) => (
+      {data?.categories.map((category, index) => (
         <MotionCategoryItem
           key={category}
           custom={index + 1}

@@ -1,17 +1,21 @@
 import { useDispatch } from 'react-redux';
 
+import { newsApi } from '@/api/getAPI';
 import { configureStore } from '@reduxjs/toolkit';
 
-import categoriesSlice from './slices/categoriesSlice';
+import categorySlice from './slices/categorySlice';
 import newsSlice from './slices/newsSlice';
 import regionsSlice from './slices/regionsSlice';
 
 export const store = configureStore({
   reducer: {
     news: newsSlice,
-    categories: categoriesSlice,
+    category: categorySlice,
     regions: regionsSlice,
+    [newsApi.reducerPath]: newsApi.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(newsApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
