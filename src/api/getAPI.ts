@@ -24,7 +24,7 @@ interface newsInterface {
   author: string;
 }
 
-interface Params {
+interface ParamsInterface {
   category: string;
   country: string;
   page_number: number;
@@ -45,7 +45,7 @@ export const newsApi = createApi({
   endpoints: builder => ({
     getNews: builder.query<newsDTO, string>({
       query: params => {
-        const { category, country, page_number, page_size }: Params =
+        const { category, country, page_number, page_size }: ParamsInterface =
           JSON.parse(params);
 
         return {
@@ -55,7 +55,6 @@ export const newsApi = createApi({
         };
       },
     }),
-
     getCategories: builder.query<CategoriesDTO, string>({
       query: name => ({
         url: name,
@@ -71,8 +70,5 @@ export const newsApi = createApi({
   }),
 });
 
-export const {
-  useLazyGetNewsQuery,
-  useGetCategoriesQuery,
-  useGetRegionsQuery,
-} = newsApi;
+export const { useGetNewsQuery, useGetCategoriesQuery, useGetRegionsQuery } =
+  newsApi;

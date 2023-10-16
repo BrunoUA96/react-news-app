@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useLazyGetNewsQuery } from '@/api/getAPI';
+import { useGetNewsQuery } from '@/api/getAPI';
 import {
   Layout,
   MotionBannerCard,
@@ -15,25 +15,20 @@ import { selectedRegion } from '@/redux/slices/regionSlice';
 import { motion } from 'framer-motion';
 
 export const Main = () => {
-  const activeRegion = useSelector(selectedRegion);
   const activeCategory = useSelector(selectedCategory);
-
-  const [trigger, { data, error, isFetching }] = useLazyGetNewsQuery();
+  const activeRegion = useSelector(selectedRegion);
 
   const [activePage, setActivePage] = useState(1);
-  // const [itemsPerPage, _] = useState(10);
   const itemsPerPage = 10;
 
-  useEffect(() => {
-    const params = JSON.stringify({
-      category: activeCategory,
-      page_number: activePage,
-      page_size: itemsPerPage,
-      country: activeRegion,
-    });
+  const params = JSON.stringify({
+    category: activeCategory,
+    page_number: activePage,
+    page_size: itemsPerPage,
+    country: activeRegion,
+  });
 
-    trigger(params);
-  }, [activeCategory, activePage, itemsPerPage, activeRegion, trigger]);
+  const { data, error, isFetching } = useGetNewsQuery(params);
 
   if (error) return <h1>Upppsss...</h1>;
 
