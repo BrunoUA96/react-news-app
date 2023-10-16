@@ -5,14 +5,14 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import categorySlice from './slices/categorySlice';
 import newsSlice from './slices/newsSlice';
-import regionsSlice from './slices/regionsSlice';
+import regionSlice from './slices/regionSlice';
 
 export const store = configureStore({
   reducer: {
+    [newsApi.reducerPath]: newsApi.reducer,
     news: newsSlice,
     category: categorySlice,
-    regions: regionsSlice,
-    [newsApi.reducerPath]: newsApi.reducer,
+    region: regionSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(newsApi.middleware),

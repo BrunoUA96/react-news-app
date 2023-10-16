@@ -1,6 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import { useGetRegionsQuery } from '@/api/getAPI';
 import {
   getDayName,
   getDayNumber,
@@ -8,25 +9,22 @@ import {
   getPartOfDay,
   getYear,
 } from '@/helpers/useCalendar';
-import {
-  fetchRegions,
-  selectRegions,
-  setRegion,
-} from '@/redux/slices/regionsSlice';
+import { selectedRegion, setRegion } from '@/redux/slices/regionSlice';
 import { useAppDispatch } from '@/redux/store';
 
 export const Header: FC = () => {
-  const { regionsList, activeRegion } = useSelector(selectRegions);
-
   const dispatch = useAppDispatch();
+  const activeRegion = useSelector(selectedRegion);
 
-  useEffect(() => {
-    dispatch(fetchRegions());
-  }, [dispatch]);
+  const { data, error, isLoading } = useGetRegionsQuery('available/regions');
 
   const onChangeRegion = (region: string) => {
     dispatch(setRegion(region));
   };
+
+  if (error) return;
+
+  if (isLoading) return <div>Is Loading..</div>;
 
   return (
     <div className="flex justify-between items-center border-b pb-3">
@@ -37,33 +35,34 @@ export const Header: FC = () => {
           {getDayName()}, {getMonthName()} {getDayNumber()}, {getYear()}
         </span>
       </div>
-      {/* Weather */}
-      <div className="flex flex-col items-end">
-        <div className="flex">
-          {Object.keys(regionsList).length && (
-            <select
-              className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
-              value={Object.values(regionsList).find(
-                region => region === activeRegion,
-              )}
-              onChange={e => onChangeRegion(e.target.value)}
-            >
-              {Object.keys(regionsList)
-                .sort()
-                .map(region => {
-                  return (
-                    <option
-                      key={regionsList[region]}
-                      value={regionsList[region]}
-                    >
-                      {region}
-                    </option>
-                  );
-                })}
-            </select>
-          )}
+      {data?.regions && (
+        <div className="flex flex-col items-end">
+          <div className="flex">
+            {Object.keys(data?.regions).length && (
+              <select
+                className="bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
+                value={Object.values(data?.regions).find(
+                  region => region === activeRegion,
+                )}
+                onChange={e => onChangeRegion(e.target.value)}
+              >
+                {Object.keys(data?.regions)
+                  .sort()
+                  .map(region => {
+                    return (
+                      <option
+                        key={data?.regions[region]}
+                        value={data?.regions[region]}
+                      >
+                        {region}
+                      </option>
+                    );
+                  })}
+              </select>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
