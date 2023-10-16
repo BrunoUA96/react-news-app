@@ -24,6 +24,13 @@ interface newsInterface {
   author: string;
 }
 
+interface Params {
+  category: string;
+  country: string;
+  page_number: number;
+  page_size: number;
+}
+
 type CategoriesDTO = {
   categories: string[];
 };
@@ -37,12 +44,18 @@ export const newsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: builder => ({
     getNews: builder.query<newsDTO, string>({
-      query: name => ({
-        url: name,
-        params: { apiKey },
-        method: 'GET',
-      }),
+      query: params => {
+        const { category, country, page_number, page_size }: Params =
+          JSON.parse(params);
+
+        return {
+          url: 'search',
+          params: { apiKey, category, country, page_number, page_size },
+          method: 'GET',
+        };
+      },
     }),
+
     getCategories: builder.query<CategoriesDTO, string>({
       query: name => ({
         url: name,
@@ -58,5 +71,8 @@ export const newsApi = createApi({
   }),
 });
 
-export const { useGetNewsQuery, useGetCategoriesQuery, useGetRegionsQuery } =
-  newsApi;
+export const {
+  useLazyGetNewsQuery,
+  useGetCategoriesQuery,
+  useGetRegionsQuery,
+} = newsApi;
