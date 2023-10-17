@@ -22,10 +22,10 @@ export const NewsCard: FC<NewsCardProps> = ({ news, viewPortIndex }) => {
       <motion.div
         custom={viewPortIndex}
         variants={newsCardAnimation}
-        className="grid grid-cols-12 gap-10 cursor-pointer group mb-5"
+        className="grid grid-cols-2 md:grid-cols-12 gap-10 cursor-pointer group mb-5"
       >
         {/* Image */}
-        <div className="flex-shrink-0 col-span-12 md:col-span-3 overflow-hidden">
+        <div className="flex-shrink-0 col-span-2 md:col-span-3 overflow-hidden">
           <img
             className="object-cover w-full max-h-52 group-hover:scale-125 ease-in-out duration-300"
             src={news.image}
@@ -33,7 +33,7 @@ export const NewsCard: FC<NewsCardProps> = ({ news, viewPortIndex }) => {
           />
         </div>
 
-        <div className="flex flex-col justify-between col-span-12 md:col-span-9">
+        <div className="flex flex-col justify-between col-span-2 md:col-span-9">
           <div className="text-sm text-gray-400 font-light group-hover:text-yellow-600 ease-in-out duration-300">
             <span>{usePublishedTime(news.published)}</span>
           </div>

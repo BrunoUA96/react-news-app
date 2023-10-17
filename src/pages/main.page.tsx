@@ -56,14 +56,14 @@ export const Main = () => {
 
   if (data?.news && filterState === filters) {
     return (
-      <>
+      <div className="teste">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-12 gap-10 mb-12 border-b pb-5"
+          className="grid grid-cols-2 md:grid-cols-12 gap-10 mb-12 border-b pb-5 max-w-full"
         >
-          <div className="col-span-12 md:col-span-8">
+          <div className="col-span-2 md:col-span-8">
             <MotionBannerCard
               custom={1}
               variants={newsCardAnimation}
@@ -72,7 +72,7 @@ export const Main = () => {
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row md:flex-col gap-3 col-span-12 md:col-span-4">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-3 col-span-2 md:col-span-4">
             <MotionBannerCard
               custom={2}
               variants={newsCardAnimation}
@@ -97,7 +97,7 @@ export const Main = () => {
         </div>
 
         <Pagination activePage={activePage} setActivePage={setActivePage} />
-      </>
+      </div>
     );
   }
 };
