@@ -1,8 +1,17 @@
+import { FC } from 'react';
+
+import { newsInterface } from '@/api/getAPI';
+import { usePublishedTime } from '@/helpers/useFormatedData';
 import { motion } from 'framer-motion';
 
 import { newsCardAnimation } from './motionCardAnimation';
 
-export const NewsCard = ({ news, viewPortIndex }) => {
+interface NewsCardProps {
+  news: newsInterface;
+  viewPortIndex: number;
+}
+
+export const NewsCard: FC<NewsCardProps> = ({ news, viewPortIndex }) => {
   return (
     <motion.div
       initial="hidden"
@@ -11,13 +20,12 @@ export const NewsCard = ({ news, viewPortIndex }) => {
       className="w-full"
     >
       <motion.div
-        order={viewPortIndex}
         custom={viewPortIndex}
         variants={newsCardAnimation}
         className="grid grid-cols-12 gap-10 cursor-pointer group mb-5"
       >
         {/* Image */}
-        <div className="flex-shrink-0 col-span-3 overflow-hidden">
+        <div className="flex-shrink-0 col-span-12 md:col-span-3 overflow-hidden">
           <img
             className="object-cover w-full max-h-52 group-hover:scale-125 ease-in-out duration-300"
             src={news.image}
@@ -25,9 +33,9 @@ export const NewsCard = ({ news, viewPortIndex }) => {
           />
         </div>
 
-        <div className="flex flex-col justify-between col-span-9">
+        <div className="flex flex-col justify-between col-span-12 md:col-span-9">
           <div className="text-sm text-gray-400 font-light group-hover:text-yellow-600 ease-in-out duration-300">
-            <span>2h ago</span>
+            <span>{usePublishedTime(news.published)}</span>
           </div>
           <h5 className="text-xl text-gray-700 group-hover:text-gray-800 ease-in-out duration-300 font-bold tracking-wider font-title mb-3">
             {news.title}

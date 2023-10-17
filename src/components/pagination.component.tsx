@@ -1,4 +1,14 @@
-export const Pagination = ({ activePage, setActivePage }) => {
+import { FC } from 'react';
+
+interface PaginationProps {
+  activePage: number;
+  setActivePage: (param: number) => void;
+}
+
+export const Pagination: FC<PaginationProps> = ({
+  activePage,
+  setActivePage,
+}) => {
   // Normal button classes
   const navButton =
     'cursor-pointer bg-gray-100 hover:bg-gray-300 text-gray-600 hover:text-gray-700 px-3 py-1';
@@ -6,7 +16,7 @@ export const Pagination = ({ activePage, setActivePage }) => {
   const activeNavButton =
     'bg-violet-100 hover:bg-violet-300 text-violet-600 hover:text-violet-700 px-3 py-1';
 
-  const arrowChangePage = param => {
+  const arrowChangePage = (param: string) => {
     setActivePage(param === '-' ? activePage - 1 : activePage + 1);
   };
 
