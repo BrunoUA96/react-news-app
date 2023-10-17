@@ -1,15 +1,15 @@
 import { forwardRef } from 'react';
 
+import { newsInterface } from '@/api/getAPI';
+import { usePublishedTime } from '@/helpers/useFormatedData';
 import { motion } from 'framer-motion';
 
-import { newsInterface } from '../../redux/slices/newsSlice';
-
-interface Props {
+interface BannerCardProps {
   news: newsInterface;
   isPrincipal?: boolean;
 }
 
-export const BannerCard = forwardRef<HTMLDivElement, Props>(
+export const BannerCard = forwardRef<HTMLDivElement, BannerCardProps>(
   ({ news, isPrincipal = false }, ref) => {
     return (
       <div
@@ -35,8 +35,8 @@ export const BannerCard = forwardRef<HTMLDivElement, Props>(
             isPrincipal ? 'text-sm' : 'text-xs'
           }`}
         >
-          <span>2h ago</span>
-          <span>by Isabella Kwai</span>
+          <span>{usePublishedTime(news.published)}</span>
+          <span>{news.author}</span>
         </div>
         <h5
           className={`text-gray-700 group-hover:text-gray-800 ease-in-out duration-300 font-bold tracking-wider font-title ${

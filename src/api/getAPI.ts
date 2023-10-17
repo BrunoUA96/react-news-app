@@ -16,12 +16,13 @@ type newsDTO = {
   news: newsInterface[];
 };
 
-interface newsInterface {
+export interface newsInterface {
   id: string;
   image: string;
   title: string;
   description: string;
   author: string;
+  published: string;
 }
 
 interface ParamsInterface {

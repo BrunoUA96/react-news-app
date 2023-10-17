@@ -1,16 +1,17 @@
 import { FC } from 'react';
 
-import { newsInterface } from '@/redux/slices/newsSlice';
+import { newsInterface } from '@/api/getAPI';
+import { usePublishedTime } from '@/helpers/useFormatedData';
 import { motion } from 'framer-motion';
 
 import { newsCardAnimation } from './motionCardAnimation';
 
-interface NewsCardInterface {
+interface NewsCardProps {
   news: newsInterface;
   viewPortIndex: number;
 }
 
-export const NewsCard: FC<NewsCardInterface> = ({ news, viewPortIndex }) => {
+export const NewsCard: FC<NewsCardProps> = ({ news, viewPortIndex }) => {
   return (
     <motion.div
       initial="hidden"
@@ -34,7 +35,7 @@ export const NewsCard: FC<NewsCardInterface> = ({ news, viewPortIndex }) => {
 
         <div className="flex flex-col justify-between col-span-9">
           <div className="text-sm text-gray-400 font-light group-hover:text-yellow-600 ease-in-out duration-300">
-            <span>2h ago</span>
+            <span>{usePublishedTime(news.published)}</span>
           </div>
           <h5 className="text-xl text-gray-700 group-hover:text-gray-800 ease-in-out duration-300 font-bold tracking-wider font-title mb-3">
             {news.title}

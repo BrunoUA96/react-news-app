@@ -36,38 +36,38 @@ export const Categories: FC<CategoriesProps> = () => {
     dispatch(setActiveCategory(category));
   };
 
-  if (error) {
-    return <div>Not available categories</div>;
-  }
-
-  if (isLoading) {
-    return <div>Is Loading</div>;
-  }
-
   return (
     <motion.ul
       initial="hidden"
       animate="visible"
       className="flex gap-2 my-3 border-b pb-3 overflow-x-scroll"
     >
-      <MotionCategoryItem
-        custom={1}
-        variants={categoryAnimation}
-        category={'All'}
-        activeCategory={activeCategory}
-        onChangeCategory={onChangeCategory}
-      />
+      {isLoading ? (
+        <div>Is Loading...</div>
+      ) : error ? (
+        <div>No categories available</div>
+      ) : (
+        <>
+          <MotionCategoryItem
+            custom={1}
+            variants={categoryAnimation}
+            category={'All'}
+            activeCategory={activeCategory}
+            onChangeCategory={onChangeCategory}
+          />
 
-      {data?.categories.map((category, index) => (
-        <MotionCategoryItem
-          key={category}
-          custom={index + 1}
-          variants={categoryAnimation}
-          category={category}
-          activeCategory={activeCategory}
-          onChangeCategory={onChangeCategory}
-        />
-      ))}
+          {data?.categories.map((category, index) => (
+            <MotionCategoryItem
+              key={category}
+              custom={index + 1}
+              variants={categoryAnimation}
+              category={category}
+              activeCategory={activeCategory}
+              onChangeCategory={onChangeCategory}
+            />
+          ))}
+        </>
+      )}
     </motion.ul>
   );
 };

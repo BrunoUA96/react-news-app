@@ -4,13 +4,11 @@ import { newsApi } from '@/api/getAPI';
 import { configureStore } from '@reduxjs/toolkit';
 
 import categorySlice from './slices/categorySlice';
-import newsSlice from './slices/newsSlice';
 import regionSlice from './slices/regionSlice';
 
 export const store = configureStore({
   reducer: {
     [newsApi.reducerPath]: newsApi.reducer,
-    news: newsSlice,
     category: categorySlice,
     region: regionSlice,
   },
