@@ -17,7 +17,7 @@ export const Header: FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center border-b pb-3">
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-3">
       {/* Greetings & Date today */}
       <div>
         <h1 className="text-3xl font-bold">{usePartOfDay()}</h1>
@@ -25,7 +25,7 @@ export const Header: FC = () => {
           {useCurrentDate()}
         </span>
       </div>
-      <div className="flex flex-col items-end text-left">
+      <div className="flex flex-col mt-3 sm:mt-0 sm:items-end text-left">
         <span className="inline-block w-full mb-2">Regions:</span>
         {isLoading ? (
           <div>Loading..</div>

@@ -42,13 +42,13 @@ export const Main = () => {
   if (isFetching) {
     return (
       <div className="grid grid-cols-12 gap-10 mb-12 border-b pb-5">
-        <div className="col-span-8">
-          <Skeleton width={648} height={600} />
+        <div className="col-span-12 md:col-span-8">
+          <Skeleton height={600} />
         </div>
 
-        <div className="flex flex-col gap-3 col-span-4">
-          <Skeleton width={304} height={280} />
-          <Skeleton width={304} height={280} />
+        <div className="flex flex-row md:flex-col gap-3 col-span-12 md:col-span-4">
+          <Skeleton height={280} />
+          <Skeleton height={280} />
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export const Main = () => {
           viewport={{ once: true }}
           className="grid grid-cols-12 gap-10 mb-12 border-b pb-5"
         >
-          <div className="col-span-8">
+          <div className="col-span-12 md:col-span-8">
             <MotionBannerCard
               custom={1}
               variants={newsCardAnimation}
@@ -72,7 +72,7 @@ export const Main = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-3 col-span-4">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-3 col-span-12 md:col-span-4">
             <MotionBannerCard
               custom={2}
               variants={newsCardAnimation}

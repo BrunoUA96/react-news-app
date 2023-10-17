@@ -2,15 +2,14 @@ import { FC } from 'react';
 import ContentLoader from 'react-content-loader';
 
 interface SkeletonInterface {
-  width: number;
   height: number;
 }
 
-export const Skeleton: FC<SkeletonInterface> = ({ width, height }) => {
-  const viewBox = `0 0 ${width} ${height}`;
+export const Skeleton: FC<SkeletonInterface> = ({ height }) => {
+  const viewBox = `0 0 100% ${height}`;
   return (
     <ContentLoader
-      width={width}
+      width="100%"
       height={height}
       viewBox={viewBox}
       backgroundColor="#f0f0f0"
