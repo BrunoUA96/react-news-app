@@ -18,15 +18,15 @@ export const Main = () => {
   const activeRegion = useSelector(selectedRegion);
 
   const filters = JSON.stringify([...activeCategory, ...activeRegion]);
-
   const [filterState, setFilterState] = useState(filters);
-
-  useEffect(() => {
-    setFilterState(filters);
-  }, [filters]);
 
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    setActivePage(1);
+    setFilterState(filters);
+  }, [filters]);
 
   const params = JSON.stringify({
     category: activeCategory,
