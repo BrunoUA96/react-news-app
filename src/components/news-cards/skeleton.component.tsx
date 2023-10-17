@@ -6,12 +6,13 @@ interface SkeletonInterface {
 }
 
 export const Skeleton: FC<SkeletonInterface> = ({ height }) => {
-  const viewBox = `0 0 100% ${height}`;
+  const viewBox = `0 0 100 ${height}`;
   return (
     <ContentLoader
       width="100%"
       height={height}
       viewBox={viewBox}
+      preserveAspectRatio="none"
       backgroundColor="#f0f0f0"
       foregroundColor="#dedede"
     >
