@@ -9,6 +9,6 @@ export default {
       },
     },
   },
-  /*eslint-env node*/
-  plugins: [require('@tailwindcss/line-clamp')],
+
+  plugins: [],
 };

@@ -1,16 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
-
-export const getAPI = async (url: string, params = {}) => {
-  const response = await axios.get(`${baseURL}${url}`, {
-    params: { apiKey, ...params },
-  });
-
-  return response;
-};
 
 type newsDTO = {
   news: newsInterface[];
